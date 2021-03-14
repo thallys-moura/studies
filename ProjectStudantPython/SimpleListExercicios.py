@@ -1,4 +1,4 @@
-from random import randint, random
+from random import randint, random, choices
 
 
 def criaExibiLista():
@@ -407,10 +407,12 @@ def progressaoAritimetica():
         if callback == 'S':
             progressaoAritimetica()
 
+
 # Estudar with > finally essa funcionalidade permite gravar o logs do que foi executado
 # no metodo em questão.
 
-progressaoAritimetica()
+# progressaoAritimetica()
+
 ##########################################################################################
 ##########################################################################################
 
@@ -419,4 +421,342 @@ progressaoAritimetica()
 # listas NEG e POS: a primeira contendo somente os valores negativos e a segunda contendo os valores
 # positivos e zero. Apresentar na tela as listas NEG e POS e a quantidade de valores contidos em cada uma
 
-# PAREI AQUI CONTINUAR LISTA DE EXERCICIO PAGINA 117
+def numerosNegativosPositivosa():
+    N = int(input("Informe um numero entre 0 e 50"))
+    listaTotal = []
+    listaNmerosNegativos = []
+    listaNumerosPositivos = []
+    aux1 = 0
+
+    if 0 < N < 50:  # simplificando condição do if
+        while aux1 < N:  # incremento o valor há minha lista
+            value = int(input("Informe um valor da lista: "))
+            if value == 0:
+                print("informado não pode ser 0")
+            else:
+                listaTotal.append(value)
+                aux1 += 1
+
+        # variaveis para trabalhar com os indices da lista
+        count = 0
+        while count < len(listaTotal):
+            # verifico se o valor inserido no indice corrente no loop é menor que 0 (negativo) ou maior que 0 (positivo)
+            if listaTotal[count] < 0:
+                listaNmerosNegativos.append(listaTotal[count])
+            elif listaTotal[count] > 0:
+                listaNumerosPositivos.append(listaTotal[count])
+            else:
+                print("O numero não pode ser 0")
+            count += 1
+
+        print("Lista Total Digitada")
+        print(listaTotal)
+        print("\n")
+        print("Numeros Posítivos ")
+        print(listaNumerosPositivos)
+        print("\n")
+        print("Numeros Negativos")
+        print(listaNmerosNegativos)
+
+    else:
+        print("Numero informado deve ser maior que 0  e menor que 50")
+        # Em caso de erro no primeiro paço, refaço a chamada.
+        numerosNegativosPositivosa()
+
+
+# numerosNegativosPositivosa()
+
+# NESTE ECERCICIO, PENSEI EM DISTINGUIR O CODIGO DO ESCRITO A CIMA DELE
+# APENAS PARA VREIFICAR MAIS CLARAMENTE UMA DIFERENÇA ENTRE AS ESTRUTURAS
+# E BUSCAR ENTEENDER DE UMA FORMA MAIS CLARA SUAS FUNCIONALIDADES E COMO
+# ULTILIZALAS.
+#####################################################################################
+####################################################################################
+
+# 8. Escreva um programa que leia um número N (entre 0 e 50) e, em seguida, defina uma
+# lista V preenchendo-a com N números inteiros aleatórios (utilizar a função randint).
+# Exiba-a na tela. Inicie um laço no qual será feita a leitura de um número X e que
+# termina quando X for zero. Pesquise se X está ou não na lista V e, caso esteja,
+# elimine todas as suas ocorrências.
+
+def delElementoListaDinamica():
+    N = int(input('Informe um numero de 0 a 50'))
+    listaV = []
+    X = 0
+    tamanhoInicial = 0
+
+    if N > 0:
+        count = 0
+        while count < N:
+            listaV.append(randint(0, 100))  # Gero um numero aleatorio no range d 0,100 para cada um dos N elementos
+            count += 1
+        tamanhoInicial = len(
+            listaV)  # Alimento uma variávele com o tamanho da lista para uso posterior em uma 2 acão/etapa
+        print(listaV)
+
+    while True:  # Laço na ideia de um DoWhile onde o loop é continuo até que tenha realizado todas as operações necessárias na dada acao/etapa
+        if (len(listaV) < tamanhoInicial):
+            print(listaV)
+        X = int(input("Informe um numero para remover da lista digite 0 (ZERO) para cancelar a operação: "))
+        if X == 0:
+            print("Laço encerrado")
+            break
+        elif X in listaV:
+            listaV.remove(
+                X)  # IMPORTANTE. NESTA LINHA, ESTOU REMOVENDO DA MEMORIA O ELEMENTO ADICIONADO NA LISTA QUE RESPONDA HÁ CONDIÇÃO
+            # COM ISSO. ESTE DADO PASSA A NÃO EXISTIR. PARA ESSES CASOS, IDEAL USAR VARIÁVL AUXILIAR, AFIM DE RECICLAR O DADO
+            # EM CASO DE NECESSIDADE.
+
+    print("\n")
+    print("Essa é a lista final: ")
+    print(listaV)
+
+
+# delElementoListaDinamica()
+
+#####################################################################################
+####################################################################################
+
+# 9. O programa deverá ler dois inteiros chamados Min e Max. Min pode ser
+# qualquer valor e Max, obrigatoriamente, deve ser maior que Min.
+# Em segui-da, preencher uma lista com todos os valores divisíveis
+# por 7 contidos no intervalor fechado [Min, Max]. Exibir a lista resultante na tela.
+
+def retornaDivisiveisPor7():
+    min = int(input("Informe o valor minimo: "))
+    max = int(input("Informe o valor para maximo: "))
+
+    while max <= min:
+        max = int(input("Informe um valor para maximo maior que minimo: "))
+
+    N = int(input("Informe a quantidade de valores da lista: "))
+    count = 0
+    aux1 = 7
+
+    listaIntervalo = []
+
+    while count < N:
+        if (aux1 != 7 and aux1 % 7 == 0):
+            if (aux1 > min and aux1 <= max):
+                listaIntervalo.append(aux1)
+                count += 1  # incremento o contador do while após confirmar a existencia do valor, então posso prosseguir para o proximo laço no loop.
+        aux1 += 7  # incremento o valor do aux1 somando 7, logo todo numero divisivel por ele é sua propria soma
+
+    print(listaIntervalo)  # exibo a lista com os dados armazenados.
+
+
+# retornaDivisiveisPor7()
+
+#####################################################################################
+####################################################################################
+
+# 10. Escreva um programa que leia do teclado uma lista com N elementos. Em seguida,
+# o programa deve eliminar os elementos que estiverem repetidos, mantendo apenas a primeira
+# ocorrência de cada. Apresentar a lista resul-tante na tela. Os valores eliminados devem ser
+# armazenados em outra lista que também deve ser exibida.
+
+def deleteExibeResultado():
+    N = int(input('Informe a quantidade de elementos que ira inserir na lista'))
+    listaV, listaRemovidos, listaTotal = [], [], []
+
+    X = 0
+    tamanhoInicial = 0
+
+    if N > 0:
+        count = 0
+        while count < N:
+            value = int(input("informe um numero: "))
+            listaTotal.append(value)  # Insere na lista com todos os valores inseridos
+
+            if value not in listaV:
+                listaV.append(value)  # Insere na lista resultante final que tem apenas os valores não repetidos
+                count += 1
+            else:
+                listaRemovidos.append(value)  # Insere na lista dos valores removidos
+                count += 1
+
+        # Exibo as três listas trabalhadas
+        print("\n")
+        print("Essa é a lista final com valores unicos: ")
+        print(listaV)
+        print("\n")
+        print("Essa é a lista com todos os valores removidos")
+        print(listaRemovidos)
+        print("\n")
+        print("Essa é a lista com todos os valores trabalhados")
+        print(listaTotal)
+
+
+# deleteExibeResultado()
+
+#####################################################################################
+####################################################################################
+# 11. Faça um programa que leia um número inteiro N bem grande (acima de 5.000).
+# Preencha uma lista de tamanho N com números inteiros aleatórios positivos.
+# Em seguida, inicie um laço de pesquisa, no qual o valor a ser pesquisado deve ser
+# lido do teclado, e o programa deve dizer se tal valor está ou não contido na lista, bem como
+# dizer sua posição. No caso de várias ocorrências, exibir todas. O laço de pesquisa termina quando for digitado o zero.
+# Use o algoritmo de busca sequencial.
+
+def algoritimoSequencial20():
+    print("Lista Sequencial \n")
+    N = int(input("Digite um valor para tamanho da Lista > 5000: "))
+    L = []
+    if N < 5000:
+        algoritimoSequencial20()
+    L = choices(range(0, 1000), k=N)
+    L.sort()
+    listaCopia = L
+    print(listaCopia)
+    listaValoresDobrados = []
+    listaValoresUnicos = []
+    i = 0
+    valor = int(input("Digite um valor"))
+    for X in listaCopia:
+        i += 1
+        if X in listaValoresUnicos:
+            pass
+        else:
+            if valor == listaCopia[i - 1]:
+                listaValoresUnicos.append((i - 1, valor))
+
+    print("Segue uma lista com tuplas refeerentes a indice:elemento")
+    print(listaValoresUnicos)
+
+
+# algoritimoSequencial20()
+#####################################################################################
+####################################################################################
+# 12. Escreva um programa que leia do teclado duas matrizes de dimensões 2×2 e mostre
+# na tela a soma dessas duas matrize
+
+# FUNÇÃO CRIADA FORA DO SCOPO ORIGINAL AFIM DE SE REUTILIZADO.
+# AQUI REALIZO A SOMA DAS MATRIZES.
+def somarMatrizes(matriz1, matriz2):
+    if (len(matriz1) != len(matriz2) or len(matriz1[0]) != len(matriz2[0])):
+        return None
+    result = []
+    for i in range(len(matriz1)):
+        result.append([])  # informo a linha da matriz
+        for j in range(len(matriz1[0])):
+            result[i].append(matriz1[i][j] + matriz2[i][j])
+    return result
+
+
+def MatrizesSoma():
+    aux1 = 0
+    matrizes = []
+    while aux1 <= 1:  # QUANTIDADE DE MATRIZES POR PADRÃO É NECESSÁRIO PREENCHER 2 RAIZES
+        print("Matriz {0}".format(aux1))
+        y = 1  # dimensões > coluna
+        x = 1  # dimensões > linha
+        i = 0
+        matriz = []
+        while i <= x:
+            j = 0
+            matriz.append([])
+            while j <= y:
+                value = int(input("Valor para linha {0} e coluna {1}".format(i, j)))
+                matriz[i].append(value)
+                j += 1
+            i += 1
+        matrizes.append(matriz)
+
+        # REALIZO A EXIBIÇÃO DAS MATRIZES.
+        print('exibir Matriz')
+        i = 0
+        while i <= x:
+            j = 0
+            print('|', end='')
+            while j <= y:
+                print("{0:4}".format(matriz[i][j]), end='')
+                j += 1
+            print(' | ')
+            i += 1
+        aux1 += 1
+
+    soma = somarMatrizes(matrizes[0], matrizes[1])  # soma e o nosso retorno, result
+    if soma is not None:
+        for i in soma:
+            print(i)
+    else:
+        print('Matrizes devem conter o mesmo numero de linhas e colunas')
+
+
+# MatrizesSoma()
+
+########################################################################################
+########################################################################################
+# 13. Escreva um programa que leia do teclado duas matrizes de dimensões 2×2 e mostre na
+# tela a multiplicação dessas duas matrizes.
+def multiplicarMatrizes(matriz1, matriz2):
+    def getLinha(matriz, n):
+        return [i for i in matriz[n]]  # ou simplesmente return matriz[n]
+
+    def getColuna(matriz, n):
+        return [i[n] for i in matriz]
+
+    mat1 = matriz1  # uma matriz 2x2
+    mat1lin = len(mat1)  # retorna 2
+    mat1col = len(mat1[0])  # retorna 2
+
+    mat2 = matriz2  # uma matriz 2x3
+    mat2lin = len(mat2)  # retorna 2
+    mat2col = len(mat1[0])  # retorna 3
+
+    matRes = []  # deverá ser uma matriz 2x3
+    for i in range(mat1lin):
+        matRes.append([])
+
+        for j in range(mat2col):
+            # multiplica cada linha de mat1 por cada coluna de mat2;
+            listMult = [x * y for x, y in zip(getLinha(mat1, i), getColuna(mat2, j))]
+
+            # e em seguida adiciona a matRes a soma das multiplicações
+            matRes[i].append(sum(listMult))
+    return matRes
+
+
+
+
+def MatrizesMultiplicacao():
+    aux1 = 0
+    matrizes = []
+    while aux1 <= 1:  # QUANTIDADE DE MATRIZES POR PADRÃO É NECESSÁRIO PREENCHER 2 RAIZES
+        print("Matriz {0}".format(aux1))
+        y = 1  # dimensões > coluna
+        x = 1  # dimensões > linha
+        i = 0
+        matriz = []
+        while i <= x:
+            j = 0
+            matriz.append([])
+            while j <= y:
+                value = int(input("Valor para linha {0} e coluna {1}".format(i, j)))
+                matriz[i].append(value)
+                j += 1
+            i += 1
+        matrizes.append(matriz)
+
+        # REALIZO A EXIBIÇÃO DAS MATRIZES.
+        print('exibir Matriz')
+        i = 0
+        while i <= x:
+            j = 0
+            print('|', end='')
+            while j <= y:
+                print("{0:4}".format(matriz[i][j]), end='')
+                j += 1
+            print(' | ')
+            i += 1
+        aux1 += 1
+
+    multiplicao = multiplicarMatrizes(matrizes[0], matrizes[1])  # soma e o nosso retorno, result
+    if multiplicao is not None:
+        for i in multiplicao:
+            print(i)
+    else:
+        print('Matrizes devem conter o mesmo numero de linhas e colunas')
+
+
+#MatrizesMultiplicacao()
