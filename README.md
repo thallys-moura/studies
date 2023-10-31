@@ -7,12 +7,6 @@
 ## Olá!!!
 #### Seja bem vindo
 
-> Este reposítorio foi criado afim de apresentar uma evolução na escrita 
-> de um projeto em Python 3.x de acordo com o estudo d alguns livros.
->   Irei Atribuir também há este reposítorio conteúdo que serão absorvidos
-> há nivel acadêmico.
-> Para você visitante, obrigado por sua visita a esté repositório!!!
-> Espro ter lhe ajudado em algo
 
 ## Contatos:
 - thallys.moura@outlook.com
